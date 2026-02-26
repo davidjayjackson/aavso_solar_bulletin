@@ -9,25 +9,40 @@ editor: visual
 ```{r, message=FALSE,echo=FALSE}
 library(DBI)
 library(RMariaDB)
-library(dbplyr)
+library(dbplyr) # Run R code against database
 library(tidyverse)
 ```
 
 ## Connect to DB
 
 ```{r}
+
 con <- dbConnect(
   RMariaDB::MariaDB(),
   dbname = "solar",
-  host = "alnilam.aavso.org",
-  user = "jdac",
+  host="localhost",
+#  host = "alnilam.aavso.org",
+  user = "root",
   password = "dJj135790",
   port = 3306
 )
 ```
 
-## List Tables
+## List Databases On Server
+
+```{r}
+dbGetQuery(con, "SHOW DATABASES;")
+```
+
+
+## List Tables In Database
 
 ```{r}
 dbListTables(con)
+```
+
+## Lost Columns in Table
+
+```{r}
+dbListFields(con, "sun_header")
 ```
