@@ -1,0 +1,33 @@
+---
+title: "Sunspots + MySQL"
+format: html
+editor: visual
+---
+
+## Quarto
+
+```{r, message=FALSE,echo=FALSE}
+library(DBI)
+library(RMariaDB)
+library(dbplyr)
+library(tidyverse)
+```
+
+## Connect to DB
+
+```{r}
+con <- dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "solar",
+  host = "alnilam.aavso.org",
+  user = "jdac",
+  password = "dJj135790",
+  port = 3306
+)
+```
+
+## List Tables
+
+```{r}
+dbListTables(con)
+```
